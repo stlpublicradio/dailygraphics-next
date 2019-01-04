@@ -287,7 +287,11 @@ select {
 
 .preview-page .preview-container[data-width="sidebar"] { width: 180px }
 .preview-page .preview-container[data-width="mobile"] { width: 360px }
-.preview-page .preview-container[data-width="desktop"] { width: 730px }
+.preview-page .preview-container[data-width="desktop"] { width: 663px }
+.preview-page .preview-container[data-width="desktop-sidebar"] { width: 678px }
+.preview-page .preview-container[data-width="inset"] { width: 317px }
+.preview-page .preview-container[data-width="inset-sidebar"] { width: 324px }
+.preview-page .preview-container[data-width="full-width"] { width: 1010px }
 
 .preview-page .metadata {
   max-width: 700px;

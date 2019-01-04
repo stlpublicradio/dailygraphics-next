@@ -18,9 +18,12 @@
     <h1 class="title"><%= slug %></h1>
     
     <select class="breakpoint" aria-label="Preview width">
-      <option value="sidebar">Sidebar (180px)</option>
       <option value="mobile" selected>Mobile (360px)</option>
-      <option value="desktop">Desktop (730px)</option>
+      <option value="desktop">Desktop (663px)</option>
+      <option value="desktop-sidebar">Desktop + Sidebar (678px)</option>
+      <option value="inset">Inset (317px)</option>
+      <option value="inset-sidebar">Inset + Sidebar (324px)</option>
+      <option value="full-width">XL (1010px)</option>
       <option value="fluid">Fluid</option>
     </select>
     
@@ -83,17 +86,65 @@
   <section class="metadata">
 
     <h2>Embed code</h2>
+    <p>This will add a full-width graphic, with a link to the graphic below (in case the viewer can't see the graphic). Copy this into the HTML Source of the story in Core Publisher where you'd like the graphic to appear.</p>
+    <p>Core Publisher's max story width is 663px, or 678px if the sidebar is enabled.</p>
     <textarea
       class="embed-code copy-on-click"
       readonly="readonly"
-      rows="4"
+      rows="6"
       cols="80"
       aria-label="Embed code"
     ><%=
-`<p data-pym-loader data-child-src="https://apps.npr.org/dailygraphics/graphics/{{slug}}/" id="responsive-embed-{{slug}}"> Loading... </p> <script src="https://pym.nprapps.org/npr-pym-loader.v2.min.js"></script>`
+`<p data-pym-loader data-child-src="http://apps.stlpublicradio.org/dailygraphics/graphics/{{slug}}/" id="responsive-embed-{{slug}}"> Loading... </p> <script src="https://pym.nprapps.org/npr-pym-loader.v2.min.js"></script><p><em><strong> <a href="http://apps.stlpublicradio.org/dailygraphics/graphics/{{slug}}?mode=childlink&utm_medium=app&utm_campaign=storyredirect">Don't see the graphic above? Click here.</a></em></strong></p>`
 .replace(/\</g, "&lt;")
 .replace(/\>/g, "&gt;")
 .replace(/\{\{slug\}\}/g, slug) %></textarea>
+
+
+<h3>Inset embed code</h3>
+    <p>This will add an inset graphic, with a link to the graphic below (in case the viewer can't see the graphic). Copy this into the HTML Source of the story in Core Publisher where you'd like the graphic to appear.</p>
+    <h5>Right</h5>
+    <textarea
+      class="embed-code copy-on-click"
+      readonly="readonly"
+      rows="6"
+      cols="80"
+      aria-label="Embed code"
+    ><%=
+`<p class="wysiwyg-asset-image-wrapper inset" data-pym-loader data-child-src="http://apps.stlpublicradio.org/dailygraphics/graphics/{{slug}}/" id="responsive-embed-{{slug}}"> Loading... </p> <script src="https://pym.nprapps.org/npr-pym-loader.v2.min.js"></script><p class="wysiwyg-asset-image-wrapper inset" ><em><strong> <a href="http://apps.stlpublicradio.org/dailygraphics/graphics/{{slug}}?mode=childlink&utm_medium=app&utm_campaign=storyredirect">Don't see the graphic above? Click here.</a></em></strong></p>`
+.replace(/\</g, "&lt;")
+.replace(/\>/g, "&gt;")
+.replace(/\{\{slug\}\}/g, slug) %></textarea>
+<h5>Left</h5>
+    <textarea
+      class="embed-code copy-on-click"
+      readonly="readonly"
+      rows="6"
+      cols="80"
+      aria-label="Embed code"
+    ><%=
+`<p class="wysiwyg-asset-image-wrapper left" data-pym-loader data-child-src="http://apps.stlpublicradio.org/dailygraphics/graphics/{{slug}}/" id="responsive-embed-{{slug}}"> Loading... </p> <script src="https://pym.nprapps.org/npr-pym-loader.v2.min.js"></script><p class="wysiwyg-asset-image-wrapper left" ><em><strong> <a href="http://apps.stlpublicradio.org/dailygraphics/graphics/{{slug}}?mode=childlink&utm_medium=app&utm_campaign=storyredirect">Don't see the graphic above? Click here.</a></em></strong></p>`
+.replace(/\</g, "&lt;")
+.replace(/\>/g, "&gt;")
+.replace(/\{\{slug\}\}/g, slug) %></textarea>
+
+<h3>XL embed code</h3>
+    <p>This will add a graphic that stretches beyond the edges of the story on a large enough screen, with a link to the graphic below (in case the viewer can't see the graphic). Copy this into the HTML Source of the story in Core Publisher where you'd like the graphic to appear. <strong>Do not use this option unless you've consulted the graphic's creator.</strong></p>
+    <textarea
+      class="embed-code copy-on-click"
+      readonly="readonly"
+      rows="6"
+      cols="80"
+      aria-label="Embed code"
+    ><%=
+`<p class="wysiwyg-asset-image-wrapper full" data-pym-loader data-child-src="http://apps.stlpublicradio.org/dailygraphics/graphics/{{slug}}/" id="responsive-embed-{{slug}}"> Loading... </p> <script src="https://pym.nprapps.org/npr-pym-loader.v2.min.js"></script><p class="wysiwyg-asset-image-wrapper full" ><em><strong> <a href="http://apps.stlpublicradio.org/dailygraphics/graphics/{{slug}}?mode=childlink&utm_medium=app&utm_campaign=storyredirect">Don't see the graphic above? Click here.</a></em></strong></p>`
+.replace(/\</g, "&lt;")
+.replace(/\>/g, "&gt;")
+.replace(/\{\{slug\}\}/g, slug) %></textarea>
+<br/>
+
+<hr>
+
 
     <% 
     if (typeof COPY != "undefined") { 
@@ -112,7 +163,8 @@
     >
 This graphic accompanies <%= m("author") %>'s story, running <%= m("time") %>, about <%= m("subject") %>.
 
-Story URL (not yet published): http://www.npr.org/templates/story/story.php?storyId=<%= m("seamus_id") %>&live=1
+Story URL (not yet published): 
+http://news.stlpublicradio.org/post/<%= m("seamus_id") %>
 
 Expected run date: <%= m("time") %>
 
@@ -122,21 +174,10 @@ Primary editorial contact: <%= m("editorial_contact") %>
 ---- GRAPHIC <%= slug %> ----
 
 Spreadsheet URL: https://docs.google.com/spreadsheets/d/<%= sheet %>/edit#gid=0
-Production URL: https://apps.npr.org/dailygraphics/graphics/<%= slug %>/preview.html
+Production URL: https://apps.stlpublicradio.org.org/dailygraphics/graphics/<%= slug %>/preview.html
 <% Object.keys(COPY.labels).forEach(key => __p += `\n${key}: ${COPY.labels[key]}\n`); %>
     </textarea>
     <% } %>
-
-    <h2>Direct link</h2>
-
-    Underneath the graphic embed, in the text of the story, add a prompt with a direct link to the graphic (without this preview frame, embed code, etc.). You can copy/paste the text below directly into Seamus (new editor) and the formatting should be preserved.
-
-    <blockquote class="direct-link">
-      <p><em><strong> <a
-        href="https://apps.npr.org/dailygraphics/graphics/<%= slug %>?mode=childlink&utm_source=nprnews&utm_medium=app&utm_campaign=storyredirect">
-        Don't see the graphic above? Click here.
-      </a></em></strong></p>
-    </blockquote>
 
   </section>
 
