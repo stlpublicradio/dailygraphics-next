@@ -4,7 +4,6 @@ var processHTML = require("../../lib/processHTML");
 var readJSON = require("../../lib/readJSON");
 
 module.exports = async function(request, response) {
-
   var app = request.app;
   var config = app.get("config");
 
@@ -25,9 +24,10 @@ module.exports = async function(request, response) {
 
   if (sheet) {
     data.COPY = await getSheet(sheet);
-  };
+  }
 
-  var file = path.join(config.root, slug, "index.html");
+  var basename = request.params[0] + ".html";
+  var file = path.join(config.root, slug, basename);
   var output = "";
   try {
     output = await processHTML(file, data);
@@ -35,8 +35,9 @@ module.exports = async function(request, response) {
     consoles.error(`Error in ${err.filename}: ${err.message}`);
     output = "";
   }
-  output += `<script src="http://localhost:35729/livereload.js"></script>`;
+  if (!(config.argv.liveReload === false)) {
+    output += `<script src="http://localhost:${config.argv.liveReload || 35729}/livereload.js"></script>`;
+  }
 
   response.send(output);
-
 };

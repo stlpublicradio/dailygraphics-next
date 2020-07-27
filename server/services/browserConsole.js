@@ -1,6 +1,8 @@
 var ws = require("ws");
 
 module.exports = function(app) {
+  var config = app.get("config");
+  if (config.argv.websockets === false) return;
 
   var http = app.get("server");
   var server = new ws.Server({ noServer: true });
@@ -16,7 +18,7 @@ module.exports = function(app) {
       console.log(method.toUpperCase() + ": ", ...args);
       server.clients.forEach(client => {
         if (client.readyState == ws.OPEN) {
-          client.send(JSON.stringify({ method, args }))
+          client.send(JSON.stringify({ method, args }));
         }
       });
     };

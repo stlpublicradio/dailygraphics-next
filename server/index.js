@@ -1,22 +1,15 @@
 var bodyparser = require("body-parser");
 var express = require("express");
 var fs = require("fs").promises;
-var minimist = require("minimist");
 var path = require("path");
 
 var app = express();
 
-var argv = minimist(process.argv);
-
 module.exports = async function(config) {
-
-  config.root = path.join(process.cwd(), config.graphicsPath);
-  config.templateRoot = path.join(process.cwd(), config.templatePath);
-  config.forceSheetCache = argv["force-sheet-cache"];
 
   app.set("config", config);
 
-  var port = argv.port || 8000;
+  var port = config.argv.port || 8000;
   app.set("port", port);
 
   var server = app.listen(port);
@@ -36,7 +29,7 @@ module.exports = async function(config) {
   // basic page loading
   app.get("/", require("./handlers/root"));
   app.get("/graphic/:slug/", require("./handlers/parent"));
-  app.get("/graphic/:slug/index.html", require("./handlers/child"));
+  app.get("/graphic/:slug/*.html", require("./handlers/child"));
   app.get("/graphic/:slug/*.js", require("./handlers/bundle"));
   app.get("/graphic/:slug/*.css", require("./handlers/style"));
 
@@ -54,4 +47,5 @@ module.exports = async function(config) {
   // catch-all for static assets
   app.get("/graphic/:slug/*", require("./handlers/files"));
 
+  console.log(`You got this! Open http://localhost:${port} in your browser to begin.`);
 };

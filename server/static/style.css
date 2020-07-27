@@ -128,18 +128,35 @@ select {
   justify-content: space-between;
   z-index: 999;
   position: relative;
+  flex-wrap: wrap;
 }
 
-.toolbar .title {
+.toolbar h1 {
   font-size: 24px;
   font-weight: bold;
   margin: 0;
+  display: inline;
+}
+
+.toolbar .title {
   flex: 1;
 }
 
+@media (max-width: 900px) {
+  .toolbar {
+    justify-content: flex-end;
+  }
+
+  .toolbar .title {
+    flex: 0 0 100%;
+    padding-bottom: 8px;
+  }
+}
+
 .toolbar button,
-.toolbar .button {
-  margin: 0 4px;
+.toolbar .button,
+.toolbar select {
+  margin: 0 4px 0;
   font-size: 12px;
 }
 
@@ -277,21 +294,40 @@ select {
   color: red;
 }
 
+.preview-page .preview {
+  margin: 32px auto;
+}
+
+.preview-page .preview-select {
+  padding: 20px;
+}
+
+.preview-page .preview-select select {
+  margin: auto;
+  display: block;
+}
+
+
 .preview-page .preview-container {
   border: 2px dashed var(--light-gray);
-  margin: 32px auto;
   /* exception so we can add borders with impunity */
+  margin: auto;
   box-sizing: content-box;
   width: 100%;
 }
 
 .preview-page .preview-container[data-width="sidebar"] { width: 180px }
 .preview-page .preview-container[data-width="mobile"] { width: 360px }
+<<<<<<< HEAD
 .preview-page .preview-container[data-width="desktop"] { width: 663px }
 .preview-page .preview-container[data-width="desktop-sidebar"] { width: 678px }
 .preview-page .preview-container[data-width="inset"] { width: 317px }
 .preview-page .preview-container[data-width="inset-sidebar"] { width: 324px }
 .preview-page .preview-container[data-width="full-width"] { width: 1010px }
+=======
+.preview-page .preview-container[data-width="desktop"] { width: 730px }
+.preview-page .preview-container[data-width="fluid"] { border-width: 2px 0; }
+>>>>>>> cbb05da6bb83ebb4685061111c1245368b82169e
 
 .preview-page .metadata {
   max-width: 700px;

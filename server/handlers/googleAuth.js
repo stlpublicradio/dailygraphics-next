@@ -4,19 +4,24 @@ var { URL } = require("url");
 var authorize = async function(request, response) {
   var app = request.app;
 
+  if (process.env.GOOGLE_APPLICATION_CREDENTIALS) {
+    response.send("You're using a service account, you don't need to authorize.");
+    return;
+  }
+
   var { getClient, scopes } = app.get("google").auth;
 
-  var client = await getClient();
+  var host = request.hostname;
+  var port = app.get("port");
+  var redirect = `http://${host}:${port}/authenticate/`;
+
+  var client = await getClient(redirect);
   var authURL = client.generateAuthUrl({
     access_type: "offline",
     scope: scopes.join(" "),
     // setting prompt and access_type to these values forces the API to give us a refresh token back
     prompt: "consent"
   });
-
-  var host = request.hostname;
-  var port = app.get("port");
-  var redirect = `http://${host}:${port}/authenticate/`;
 
   response.status(302);
   response.set("Location", authURL);
