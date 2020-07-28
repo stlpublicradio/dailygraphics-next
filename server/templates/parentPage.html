@@ -103,10 +103,6 @@
   <section class="metadata">
 
     <h2>Embed code</h2>
-<<<<<<< HEAD
-    <p>This will add a full-width graphic, with a link to the graphic below (in case the viewer can't see the graphic). Copy this into the HTML Source of the story in Core Publisher where you'd like the graphic to appear.</p>
-    <p>Core Publisher's max story width is 663px, or 678px if the sidebar is enabled.</p>
-=======
     <% if (children) { %><h3>Default</h3><% } %>
     <textarea
       class="embed-code copy-on-click"
@@ -118,76 +114,17 @@
     <%
       if (children) for (var childPage of children.filter(c => c != "index.html")) { %>
     <h3><%= childPage %></h3>
->>>>>>> cbb05da6bb83ebb4685061111c1245368b82169e
     <textarea
       class="embed-code copy-on-click"
       readonly="readonly"
       rows="6"
       cols="80"
       aria-label="Embed code"
-<<<<<<< HEAD
-    ><%=
-`<p data-pym-loader data-child-src="http://apps.stlpublicradio.org/dailygraphics/graphics/{{slug}}/" id="responsive-embed-{{slug}}"> Loading... </p> <script src="https://pym.nprapps.org/npr-pym-loader.v2.min.js"></script><p><em><strong> <a href="http://apps.stlpublicradio.org/dailygraphics/graphics/{{slug}}?mode=childlink&utm_medium=app&utm_campaign=storyredirect">Don't see the graphic above? Click here.</a></em></strong></p>`
-.replace(/\</g, "&lt;")
-.replace(/\>/g, "&gt;")
-.replace(/\{\{slug\}\}/g, slug) %></textarea>
-
-
-<h3>Inset embed code</h3>
-    <p>This will add an inset graphic, with a link to the graphic below (in case the viewer can't see the graphic). Copy this into the HTML Source of the story in Core Publisher where you'd like the graphic to appear.</p>
-    <h5>Right</h5>
-    <textarea
-      class="embed-code copy-on-click"
-      readonly="readonly"
-      rows="6"
-      cols="80"
-      aria-label="Embed code"
-    ><%=
-`<p class="wysiwyg-asset-image-wrapper inset" data-pym-loader data-child-src="http://apps.stlpublicradio.org/dailygraphics/graphics/{{slug}}/" id="responsive-embed-{{slug}}"> Loading... </p> <script src="https://pym.nprapps.org/npr-pym-loader.v2.min.js"></script><p class="wysiwyg-asset-image-wrapper inset" ><em><strong> <a href="http://apps.stlpublicradio.org/dailygraphics/graphics/{{slug}}?mode=childlink&utm_medium=app&utm_campaign=storyredirect">Don't see the graphic above? Click here.</a></em></strong></p>`
-.replace(/\</g, "&lt;")
-.replace(/\>/g, "&gt;")
-.replace(/\{\{slug\}\}/g, slug) %></textarea>
-<h5>Left</h5>
-    <textarea
-      class="embed-code copy-on-click"
-      readonly="readonly"
-      rows="6"
-      cols="80"
-      aria-label="Embed code"
-    ><%=
-`<p class="wysiwyg-asset-image-wrapper left" data-pym-loader data-child-src="http://apps.stlpublicradio.org/dailygraphics/graphics/{{slug}}/" id="responsive-embed-{{slug}}"> Loading... </p> <script src="https://pym.nprapps.org/npr-pym-loader.v2.min.js"></script><p class="wysiwyg-asset-image-wrapper left" ><em><strong> <a href="http://apps.stlpublicradio.org/dailygraphics/graphics/{{slug}}?mode=childlink&utm_medium=app&utm_campaign=storyredirect">Don't see the graphic above? Click here.</a></em></strong></p>`
-.replace(/\</g, "&lt;")
-.replace(/\>/g, "&gt;")
-.replace(/\{\{slug\}\}/g, slug) %></textarea>
-
-<h3>XL embed code</h3>
-    <p>This will add a graphic that stretches beyond the edges of the story on a large enough screen, with a link to the graphic below (in case the viewer can't see the graphic). Copy this into the HTML Source of the story in Core Publisher where you'd like the graphic to appear. <strong>Do not use this option unless you've consulted the graphic's creator.</strong></p>
-    <textarea
-      class="embed-code copy-on-click"
-      readonly="readonly"
-      rows="6"
-      cols="80"
-      aria-label="Embed code"
-    ><%=
-`<p class="wysiwyg-asset-image-wrapper full" data-pym-loader data-child-src="http://apps.stlpublicradio.org/dailygraphics/graphics/{{slug}}/" id="responsive-embed-{{slug}}"> Loading... </p> <script src="https://pym.nprapps.org/npr-pym-loader.v2.min.js"></script><p class="wysiwyg-asset-image-wrapper full" ><em><strong> <a href="http://apps.stlpublicradio.org/dailygraphics/graphics/{{slug}}?mode=childlink&utm_medium=app&utm_campaign=storyredirect">Don't see the graphic above? Click here.</a></em></strong></p>`
-.replace(/\</g, "&lt;")
-.replace(/\>/g, "&gt;")
-.replace(/\{\{slug\}\}/g, slug) %></textarea>
-<br/>
-
-<hr>
-
-
-    <% 
-    if (typeof COPY != "undefined") { 
-      var m = s => (COPY.metadata && COPY.metadata[s]) || `__${s.toUpperCase()}__`;
-=======
     ><%- (await t.process(`${config.templateRoot}/embed.html`, { config, slug, childPage })).trim().replace(/[\s\n]+/g, " ") %></textarea>
       <% } %>
 
     <%
     if (typeof COPY != "undefined" && COPY.labels && COPY.metadata) {
->>>>>>> cbb05da6bb83ebb4685061111c1245368b82169e
     %>
     <h2>Copyedit e-mail</h2>
 
@@ -199,27 +136,7 @@
       readonly="readonly"
       rows="<%= 16 + Object.keys(COPY.labels).length * 3 %>"
       aria-label="Copyedit e-mail"
-<<<<<<< HEAD
-    >
-This graphic accompanies <%= m("author") %>'s story, running <%= m("time") %>, about <%= m("subject") %>.
-
-Story URL (not yet published): 
-http://news.stlpublicradio.org/post/<%= m("seamus_id") %>
-
-Expected run date: <%= m("time") %>
-
-Primary graphics contact: <%= "user" in config ? config.user.displayName : "__GRAPHICS_CONTACT__" %>
-Primary editorial contact: <%= m("editorial_contact") %>
-
----- GRAPHIC <%= slug %> ----
-
-Spreadsheet URL: https://docs.google.com/spreadsheets/d/<%= sheet %>/edit#gid=0
-Production URL: https://apps.stlpublicradio.org.org/dailygraphics/graphics/<%= slug %>/preview.html
-<% Object.keys(COPY.labels).forEach(key => __p += `\n${key}: ${COPY.labels[key]}\n`); %>
-    </textarea>
-=======
     ><%= await t.process(`${config.templateRoot}/copyedit.html`, { COPY, config, slug, sheet, children }) %></textarea>
->>>>>>> cbb05da6bb83ebb4685061111c1245368b82169e
     <% } %>
 
   </section>

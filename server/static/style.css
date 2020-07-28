@@ -318,16 +318,8 @@ select {
 
 .preview-page .preview-container[data-width="sidebar"] { width: 180px }
 .preview-page .preview-container[data-width="mobile"] { width: 360px }
-<<<<<<< HEAD
-.preview-page .preview-container[data-width="desktop"] { width: 663px }
-.preview-page .preview-container[data-width="desktop-sidebar"] { width: 678px }
-.preview-page .preview-container[data-width="inset"] { width: 317px }
-.preview-page .preview-container[data-width="inset-sidebar"] { width: 324px }
-.preview-page .preview-container[data-width="full-width"] { width: 1010px }
-=======
 .preview-page .preview-container[data-width="desktop"] { width: 730px }
 .preview-page .preview-container[data-width="fluid"] { border-width: 2px 0; }
->>>>>>> cbb05da6bb83ebb4685061111c1245368b82169e
 
 .preview-page .metadata {
   max-width: 700px;
