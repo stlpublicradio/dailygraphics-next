@@ -2,17 +2,16 @@
   "graphicsPath": "../graphics-js",
   "templatePath": "../dailygraphics-templates",
   // leave driveFolder blank to create new sheets in the same folder as their templates
-  "driveFolder": "0B2rSjDbnpA5XTThSNDZkWlJTX1E",
+  "driveFolder": "1yTfWruRmKoJwEwepuwxZBkiKdvJ3Mw8E",
   "s3": {
     "live": {
-      "bucket": "apps.npr.org",
+      "bucket": "apps.stlpublicradio.org",
       "prefix": "dailygraphics/graphics"
     },
     "stage": {
-      "bucket": "stage-apps.npr.org",
+      "bucket": "stlpr-stg.s3.amazonaws.com",
       "prefix": "dailygraphics/graphics"
     }
   },
-  // this is the NPR Visuals Google Analytics property. update to use your own.
-  "analyticsID": "UA-5828686-75"
+  "analyticsID": ""
 }
