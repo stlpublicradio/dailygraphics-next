@@ -28,6 +28,7 @@
     "express": "^4.16.4",
     "fsevents": "^2.0.7",
     "googleapis": "^35.0.0",
+    "jquery": "^3.5.1",
     "less": "^3.8.1",
     "lodash.escape": "^4.0.1",
     "lodash.template": "^4.4.0",
